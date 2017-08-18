@@ -7,6 +7,11 @@ download.file(url, destfile ="data.zip")
 > names(data)
 > data$Date[1:10]
 > data$Time[1:10]
+> data$DateTime <- paste(data$Date, data$Time)
+> data$DateTime<-strptime(data$DateTime, "%d/%m/%Y %H:%M:%S")
+> start<-which(data$DateTime==strptime("2007-02-01", "%Y-%m-%d"))
+> end<-which(data$DateTime==strptime("2007-02-02 23:59:00", "%Y-%m-%d %H:%M:%S"))
+> data2<-data[start:end,]
 > plot(data2$DateTime, as.numeric(as.character(data2$Global_active_power)), type ='1', ylab="Global Active Power(Kilowatts)", xlab ="")
 > plot(data2$DateTime, as.numeric(as.character(data2$Global_active_power)),
 type='l',ylab="Global Active Power (Kilowatts)", xlab="")
